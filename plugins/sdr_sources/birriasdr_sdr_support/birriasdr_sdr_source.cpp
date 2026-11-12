@@ -66,7 +66,7 @@ void BirriaSDRSource::apply_gains(bool force)
 
     int mode = manual_gain ? 1 : 0;
 
-    // GobDump re-applies settings repeatedly; skip writes that would not change the hardware.
+    // SatDump re-applies settings repeatedly; skip writes that would not change the hardware.
     if (!force && mode == applied_manual &&
         (!manual_gain || (lna == applied_lna && lpf == applied_lpf && digital == applied_digital)))
         return;
