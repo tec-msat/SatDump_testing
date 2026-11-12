@@ -9,12 +9,12 @@ if(BIRRIASDR_INCLUDE_DIR AND BIRRIASDR_LIBRARY)
     file(GLOB_RECURSE birriasdr_sdr_support_CPPS *.cpp)
     add_library(birriasdr_sdr_support SHARED ${birriasdr_sdr_support_CPPS})
     target_include_directories(birriasdr_sdr_support PUBLIC ${BIRRIASDR_INCLUDE_DIR})
-    target_link_libraries(birriasdr_sdr_support PUBLIC gobdump_core ${BIRRIASDR_LIBRARY})
+    target_link_libraries(birriasdr_sdr_support PUBLIC satdump_core ${BIRRIASDR_LIBRARY})
 
     if(MSVC)
-        install(TARGETS birriasdr_sdr_support DESTINATION ${CMAKE_INSTALL_LIBDIR}/gobdump/plugins RUNTIME_DEPENDENCY_SET gobdump_deps)
+        install(TARGETS birriasdr_sdr_support DESTINATION ${CMAKE_INSTALL_LIBDIR}/satdump/plugins RUNTIME_DEPENDENCY_SET satdump_deps)
     else()
-        install(TARGETS birriasdr_sdr_support DESTINATION ${CMAKE_INSTALL_LIBDIR}/gobdump/plugins)
+        install(TARGETS birriasdr_sdr_support DESTINATION ${CMAKE_INSTALL_LIBDIR}/satdump/plugins)
 
         # Ship the driver next to the plugin when it came from deps/, as USRP does with the
         # patched UHD. Only the SONAME file is needed at load time.
@@ -28,7 +28,7 @@ if(BIRRIASDR_INCLUDE_DIR AND BIRRIASDR_LIBRARY)
                     if(_name MATCHES "^libbirriasdr\\.so\\.[0-9]+$")
                         # install(FILES) keeps symlinks, so copy the target under the SONAME.
                         get_filename_component(_real "${_candidate}" REALPATH)
-                        install(FILES "${_real}" DESTINATION ${CMAKE_INSTALL_LIBDIR}/gobdump RENAME "${_name}")
+                        install(FILES "${_real}" DESTINATION ${CMAKE_INSTALL_LIBDIR}/satdump RENAME "${_name}")
                     endif()
                 endforeach()
             endif()
